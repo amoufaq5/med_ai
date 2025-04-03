@@ -26,3 +26,8 @@ SECURITY_SETTINGS = {
     "enable_encryption": True,
     "data_retention_days": 365,
 }
+
+# Set the base directory to E:\med_ai
+BASE_PATH = r"E:\med_ai"
+
+
