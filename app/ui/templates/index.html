@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Free Doctor Chatbot</title>
+  <link id="theme-link" rel="stylesheet" href="/static/css/day.css">
+  <script>
+    function switchTheme() {
+      var link = document.getElementById("theme-link");
+      // Toggle between day (day.css) and night (night.css)
+      if (link.getAttribute("href") === "/static/css/day.css") {
+        link.setAttribute("href", "/static/css/night.css");
+      } else {
+        link.setAttribute("href", "/static/css/day.css");
+      }
+    }
+    
+    async function sendMessage() {
+      const input = document.getElementById("user-input").value;
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: input})
+      });
+      const data = await response.json();
+      document.getElementById("chat-response").innerText = data.response;
+    }
+  </script>
+</head>
+<body>
+  <h1>Daily Free Doctor</h1>
+  <button onclick="switchTheme()">Switch Theme</button>
+  <div>
+    <input type="text" id="user-input" placeholder="Describe your symptoms here...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  <div id="chat-response"></div>
+</body>
+</html>
